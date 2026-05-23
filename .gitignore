@@ -1,0 +1,23 @@
+# Local secrets
+.env
+.env.local
+.env.*
+gh_token
+
+# Operating System files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Local temp and backup files
+*dials-local*.json
+*.log
