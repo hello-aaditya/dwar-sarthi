@@ -152,6 +152,15 @@
       "pinned": false,
       "title": "Draw.io",
       "url": "https://app.diagrams.net/"
+    },
+    {
+      "id": "d1779538403034",
+      "title": "ChatGPT",
+      "url": "https://chatgpt.com/",
+      "folder": "root",
+      "index": 6,
+      "pinned": false,
+      "customIcon": ""
     }
   ],
   "folders": [
