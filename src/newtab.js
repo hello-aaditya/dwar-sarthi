@@ -66,6 +66,45 @@ function applyAppearance() {
   else
     document.body.style.background = "";
 
+  // ── Wallpaper integrations
+  const overlay = document.getElementById("wallpaper-overlay");
+  const veil = document.getElementById("dim-veil");
+  if (s.backgroundType === "wallpaper" && s.wallpaperSource) {
+    if (overlay) {
+      overlay.style.backgroundImage = `url("${s.wallpaperSource}")`;
+      overlay.style.display = "block";
+      document.documentElement.style.setProperty("--bg-blur", `${s.wallpaperBlur || 0}px`);
+    }
+    if (veil) {
+      document.documentElement.style.setProperty("--bg-dim", (s.wallpaperDim !== undefined ? s.wallpaperDim : 20) / 100);
+    }
+  } else {
+    if (overlay) {
+      overlay.style.backgroundImage = "none";
+      overlay.style.display = "none";
+    }
+    if (veil) {
+      document.documentElement.style.setProperty("--bg-dim", "0");
+    }
+  }
+
+  // ── Font integrations
+  const fontFamily = s.fontFamily || "Georgia";
+  const fontToUse = fontFamily === "custom" ? s.customFont : fontFamily;
+  if (fontToUse && fontFamily !== "Georgia") {
+    let link = document.getElementById("google-font-style");
+    if (!link) {
+      link = document.createElement("link");
+      link.id = "google-font-style";
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
+    }
+    link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(fontToUse)}:wght@400;500;600;700&display=swap`;
+  } else {
+    document.getElementById("google-font-style")?.remove();
+  }
+  document.documentElement.style.setProperty("--font-family", `"${fontToUse}", Georgia, "Times New Roman", Times, serif`);
+
   // 3. Apply grid columns count
   const cols = s.columns || 6;
   document.documentElement.style.setProperty("--cols", cols);

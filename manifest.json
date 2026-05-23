@@ -10,7 +10,8 @@
 
   "permissions": [
     "storage",
-    "alarms"
+    "alarms",
+    "unlimitedStorage"
   ],
 
   "options_ui": {

@@ -15,7 +15,12 @@ export const DEFAULT_CONFIG = {
     backgroundImage: "",
     searchEngine: "https://www.google.com/search?q=",
     showSearch: true,
-    faviconService: "google" // "google" | "duckduckgo"
+    faviconService: "google", // "google" | "duckduckgo"
+    fontFamily: "Georgia",
+    customFont: "",
+    wallpaperSource: "",
+    wallpaperBlur: 0,
+    wallpaperDim: 20
   },
   folders: [
     { id: "root",   name: "Home",            index: 0 },

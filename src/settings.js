@@ -4,17 +4,18 @@ import { DEFAULT_CONFIG } from "./data.js";
 import { getCredentials, saveCredentials, testConnection, saveAndPush, sync } from "./github.js";
 
 let config = null;
+let localWallpaperBase64 = "";
+
+const SECURE_TOKEN_MASK = "••••••••••••••••••••••••••••••••";
 
 // ── Init ───────────────────────────────────────────────────────────────────
 async function init() {
   const stored = await chrome.storage.local.get("config");
   config = stored.config || structuredClone(DEFAULT_CONFIG);
 
-  // Apply theme immediately to settings page
-  const dark =
-    config.settings.theme === "dark" ||
-    (config.settings.theme === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
-  document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+  // Apply font and theme immediately to settings page
+  applyGlobalFont(config.settings.fontFamily, config.settings.customFont);
+  applyGlobalTheme(config.settings.theme);
 
   await loadGhFields();
   loadAppearanceFields();
@@ -23,6 +24,10 @@ async function init() {
 
   // Setup sidebar navigation switching
   setupSidebarNavigation();
+
+  // Setup custom features (password toggle, file upload zones)
+  setupPasswordToggle();
+  setupWallpaperUpload();
 
   // Wire event handlers
   bindAll();
@@ -56,36 +61,127 @@ function setupSidebarNavigation() {
   });
 }
 
-// ── GitHub section ─────────────────────────────────────────────────────────
+// ── Password Show/Hide Toggle ──────────────────────────────────────────────
+function setupPasswordToggle() {
+  const btn = document.getElementById("gh-token-toggle");
+  const input = document.getElementById("gh-token");
+  const eye = document.getElementById("eye-icon");
+  const eyeOff = document.getElementById("eye-off-icon");
+  
+  if (!btn || !input) return;
+
+  btn.addEventListener("click", () => {
+    const isPass = input.type === "password";
+    input.type = isPass ? "text" : "password";
+    eye.style.display = isPass ? "none" : "";
+    eyeOff.style.display = isPass ? "" : "none";
+  });
+}
+
+// ── Wallpaper Drag & Drop Handler ──────────────────────────────────────────
+function setupWallpaperUpload() {
+  const zone = document.getElementById("upload-zone");
+  const fileInput = document.getElementById("bg-upload-file");
+
+  if (!zone || !fileInput) return;
+
+  zone.addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", e => {
+    handleWallpaperFile(e.target.files[0]);
+  });
+
+  zone.addEventListener("dragover", e => {
+    e.preventDefault();
+    zone.classList.add("dragover");
+  });
+
+  zone.addEventListener("dragleave", () => {
+    zone.classList.remove("dragover");
+  });
+
+  zone.addEventListener("drop", e => {
+    e.preventDefault();
+    zone.classList.remove("dragover");
+    handleWallpaperFile(e.dataTransfer.files[0]);
+  });
+}
+
+function handleWallpaperFile(file) {
+  if (!file || !file.type.startsWith("image/")) return;
+  
+  const status = document.getElementById("upload-status");
+  status.textContent = "Compressing & reading image...";
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    localWallpaperBase64 = e.target.result;
+    
+    const preview = document.getElementById("upload-preview");
+    preview.src = localWallpaperBase64;
+    preview.style.display = "block";
+    
+    status.innerHTML = `Loaded: <strong>${file.name}</strong>`;
+    updateMockPreview();
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── Security Shielded GitHub Sync ──────────────────────────────────────────
 async function loadGhFields() {
   const creds = await getCredentials();
   if (!creds) return;
-  document.getElementById("gh-token").value = creds.token;
+  document.getElementById("gh-token").value = creds.token ? SECURE_TOKEN_MASK : "";
   document.getElementById("gh-owner").value = creds.owner;
   document.getElementById("gh-repo").value  = creds.repo;
   document.getElementById("gh-path").value  = creds.filePath || "dials.json";
 }
 
 async function saveGithub() {
-  const token = document.getElementById("gh-token").value.trim();
+  const tokenInput = document.getElementById("gh-token").value.trim();
   const owner = document.getElementById("gh-owner").value.trim();
   const repo  = document.getElementById("gh-repo").value.trim();
   const path  = document.getElementById("gh-path").value.trim() || "dials.json";
   const status = document.getElementById("gh-status");
 
-  if (!token || !owner || !repo) {
+  if (!tokenInput || !owner || !repo) {
     showStatus(status, "error", "All fields are required.");
     return;
+  }
+
+  let token = tokenInput;
+  const creds = await getCredentials();
+  
+  // If user didn't change the masked token field, keep the original raw token
+  if (tokenInput === SECURE_TOKEN_MASK && creds) {
+    token = creds.token;
   }
 
   try {
     showStatus(status, "", "Testing connection…");
     const username = await testConnection(token);
     await saveCredentials({ token, owner, repo, filePath: path });
+    
+    // Mask token again
+    document.getElementById("gh-token").value = SECURE_TOKEN_MASK;
     showStatus(status, "success", `Connected as @${username} ✓`);
   } catch (err) {
     showStatus(status, "error", err.message);
   }
+}
+
+async function clearGithub() {
+  const status = document.getElementById("gh-status");
+  if (!confirm("Clear saved GitHub credentials and turn off syncing?")) return;
+
+  await chrome.storage.local.remove(["gh_token", "gh_owner", "gh_repo", "gh_path", "gh_sha", "last_sync", "sync_error"]);
+  
+  document.getElementById("gh-token").value = "";
+  document.getElementById("gh-owner").value = "";
+  document.getElementById("gh-repo").value  = "";
+  document.getElementById("gh-path").value  = "dials.json";
+
+  showStatus(status, "success", "Credentials cleared safely.");
 }
 
 async function syncNow() {
@@ -99,6 +195,7 @@ async function syncNow() {
     config = merged;
     await chrome.storage.local.set({ config, last_sync: Date.now(), sync_error: "" });
     showStatus(status, "success", "Sync complete ✓");
+    
     loadAppearanceFields();
     renderFolderList();
     updateMockPreview();
@@ -110,13 +207,20 @@ async function syncNow() {
   }
 }
 
-// ── Appearance section ─────────────────────────────────────────────────────
+// ── Appearance & Design Engine ─────────────────────────────────────────────
 function loadAppearanceFields() {
   const s = config.settings;
   document.getElementById("show-search").checked = s.showSearch !== false;
   document.getElementById("show-labels").checked = s.showLabels !== false;
   document.getElementById("theme-select").value  = s.theme || "auto";
   document.getElementById("favicon-service").value = s.faviconService || "google";
+
+  // Fonts loader
+  const fontFamily = s.fontFamily || "Georgia";
+  document.getElementById("font-select").value = fontFamily;
+  toggleFontFields(fontFamily);
+  if (s.customFont) document.getElementById("custom-font-name").value = s.customFont;
+  applyGlobalFont(fontFamily, s.customFont);
 
   // Card size slider
   const cardSize = s.cardSize || 1;
@@ -133,16 +237,76 @@ function loadAppearanceFields() {
     chip.classList.toggle("active", Number(chip.dataset.cols) === (s.columns || 6));
   });
 
+  // Background values
   const bgType = s.backgroundType || "default";
   document.getElementById("bg-type").value = bgType;
   toggleBgFields(bgType);
   if (s.backgroundColor) document.getElementById("bg-color").value = s.backgroundColor;
   if (s.backgroundGradient) document.getElementById("bg-gradient").value = s.backgroundGradient;
+  
+  // Custom Wallpapers
+  if (s.backgroundType === "wallpaper") {
+    if (s.wallpaperSource && s.wallpaperSource.startsWith("data:image")) {
+      localWallpaperBase64 = s.wallpaperSource;
+      const preview = document.getElementById("upload-preview");
+      preview.src = localWallpaperBase64;
+      preview.style.display = "block";
+      document.getElementById("upload-status").innerHTML = "Local Wallpaper <strong>Loaded ✓</strong>";
+    } else if (s.wallpaperSource) {
+      document.getElementById("bg-wallpaper-url").value = s.wallpaperSource;
+    }
+  }
+
+  // Wallpaper Sliders
+  const blur = s.wallpaperBlur !== undefined ? s.wallpaperBlur : 0;
+  document.getElementById("bg-blur-slider").value = blur;
+  document.getElementById("bg-blur-val").textContent = blur + "px";
+
+  const dim = s.wallpaperDim !== undefined ? s.wallpaperDim : 20;
+  document.getElementById("bg-dim-slider").value = dim;
+  document.getElementById("bg-dim-val").textContent = dim + "%";
 }
 
 function toggleBgFields(type) {
-  document.getElementById("bg-color-field").style.display    = type === "color" ? "" : "none";
-  document.getElementById("bg-gradient-field").style.display = type === "gradient" ? "" : "none";
+  document.getElementById("bg-color-field").style.display      = type === "color" ? "" : "none";
+  document.getElementById("bg-gradient-field").style.display   = type === "gradient" ? "" : "none";
+  document.getElementById("bg-wallpaper-url-field").style.display = type === "wallpaper" ? "" : "none";
+  document.getElementById("bg-wallpaper-upload-field").style.display = type === "wallpaper" ? "" : "none";
+  document.getElementById("bg-blur-field").style.display       = type === "wallpaper" ? "" : "none";
+  document.getElementById("bg-dim-field").style.display        = type === "wallpaper" ? "" : "none";
+}
+
+function toggleFontFields(font) {
+  document.getElementById("custom-font-field").style.display = font === "custom" ? "" : "none";
+}
+
+function applyGlobalFont(fontFamily, customFontName) {
+  const fontToUse = fontFamily === "custom" ? customFontName : fontFamily;
+  
+  if (!fontToUse) return;
+
+  // Load stylesheet dynamically
+  if (fontFamily !== "Georgia") {
+    let link = document.getElementById("google-font-style");
+    if (!link) {
+      link = document.createElement("link");
+      link.id = "google-font-style";
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
+    }
+    link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(fontToUse)}:wght@400;500;600;700&display=swap`;
+  } else {
+    document.getElementById("google-font-style")?.remove();
+  }
+
+  document.documentElement.style.setProperty("--font-family", `"${fontToUse}", Georgia, serif`);
+}
+
+function applyGlobalTheme(theme) {
+  const dark =
+    theme === "dark" ||
+    (theme === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
+  document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
 }
 
 async function saveAppearance() {
@@ -160,17 +324,29 @@ async function saveAppearance() {
   config.settings.backgroundColor = document.getElementById("bg-color").value;
   config.settings.backgroundGradient = document.getElementById("bg-gradient").value;
 
+  // Font fields
+  config.settings.fontFamily      = document.getElementById("font-select").value;
+  config.settings.customFont      = document.getElementById("custom-font-name").value.trim();
+
+  // Wallpaper fields
+  config.settings.wallpaperBlur   = parseInt(document.getElementById("bg-blur-slider").value, 10);
+  config.settings.wallpaperDim    = parseInt(document.getElementById("bg-dim-slider").value, 10);
+
+  if (config.settings.backgroundType === "wallpaper") {
+    const urlSource = document.getElementById("bg-wallpaper-url").value.trim();
+    // Prioritize base64 uploaded image, fallback to URL
+    config.settings.wallpaperSource = localWallpaperBase64 || urlSource;
+  } else {
+    config.settings.wallpaperSource = "";
+  }
+
   const result = await saveAndPush(config);
   showStatus(status, result.ok ? "success" : "error",
     result.ok ? "Saved ✓" : "Saved locally, sync failed: " + result.error);
 
-  // Apply theme immediately in settings page
-  const dark =
-    config.settings.theme === "dark" ||
-    (config.settings.theme === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
-  document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
-
-  // Keep live preview updated
+  // Apply adjustments instantly
+  applyGlobalFont(config.settings.fontFamily, config.settings.customFont);
+  applyGlobalTheme(config.settings.theme);
   updateMockPreview();
 }
 
@@ -190,6 +366,16 @@ function updateMockPreview() {
   const bgType = document.getElementById("bg-type").value;
   const bgColor = document.getElementById("bg-color").value;
   const bgGradient = document.getElementById("bg-gradient").value;
+  
+  // Font preview
+  const fontSelect = document.getElementById("font-select").value;
+  const customFont = document.getElementById("custom-font-name").value.trim();
+  const fontName = fontSelect === "custom" ? customFont : fontSelect;
+
+  // Wallpaper parameters
+  const blurVal = parseInt(document.getElementById("bg-blur-slider").value, 10) || 0;
+  const dimVal = parseInt(document.getElementById("bg-dim-slider").value, 10) || 0;
+  const urlVal = document.getElementById("bg-wallpaper-url").value.trim();
 
   // 2. Set theme state on mock device
   let isDark = theme === "dark";
@@ -198,10 +384,26 @@ function updateMockPreview() {
   }
   previewDevice.setAttribute("data-theme", isDark ? "dark" : "light");
 
-  // 3. Set custom variables on mock device for scales & columns
+  // 3. Set custom variables on mock device for scales & fonts
   previewDevice.style.setProperty("--mock-card-size", cardSize);
   previewDevice.style.setProperty("--mock-text-size", textSize + "px");
   previewDevice.style.setProperty("--mock-cols", cols);
+  if (fontName) {
+    // Inject preview font stylesheet
+    if (fontSelect !== "Georgia") {
+      let previewLink = document.getElementById("google-preview-font");
+      if (!previewLink) {
+        previewLink = document.createElement("link");
+        previewLink.id = "google-preview-font";
+        previewLink.rel = "stylesheet";
+        document.head.appendChild(previewLink);
+      }
+      previewLink.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(fontName)}:wght@400;500;600;700&display=swap`;
+    } else {
+      document.getElementById("google-preview-font")?.remove();
+    }
+    previewDevice.style.fontFamily = `"${fontName}", Georgia, serif`;
+  }
 
   // 4. Toggle search box
   const mockSearch = document.getElementById("mock-search-box");
@@ -220,8 +422,22 @@ function updateMockPreview() {
   // 6. Set background style on preview canvas
   if (bgType === "color") {
     previewDevice.style.background = bgColor;
+    // reset dim layer on preview device
+    previewDevice.style.boxShadow = "none";
   } else if (bgType === "gradient") {
     previewDevice.style.background = bgGradient || "radial-gradient(circle at center, #351356 0%, #170525 100%)";
+    previewDevice.style.boxShadow = "none";
+  } else if (bgType === "wallpaper") {
+    // Custom Wallpaper image setting on preview
+    const imageToUse = localWallpaperBase64 || urlVal;
+    if (imageToUse) {
+      previewDevice.style.background = `linear-gradient(rgba(0,0,0,${dimVal/100}), rgba(0,0,0,${dimVal/100})), url("${imageToUse}")`;
+      previewDevice.style.backgroundSize = "cover";
+      previewDevice.style.backgroundPosition = "center";
+      // Simulate blur using backdrop filter or simple overlay
+    } else {
+      previewDevice.style.background = isDark ? "#220a37" : "#f5f5f7";
+    }
   } else {
     // default theme styles
     previewDevice.style.background = isDark ? "#220a37" : "#f5f5f7";
@@ -374,6 +590,16 @@ async function resetToDefaults() {
   if (!confirm("Reset all dials to defaults? Your GitHub copy will be overwritten.")) return;
   config = structuredClone(DEFAULT_CONFIG);
   const result = await saveAndPush(config);
+  
+  // Wipe base64 local states
+  localWallpaperBase64 = "";
+  const preview = document.getElementById("upload-preview");
+  if (preview) {
+    preview.src = "";
+    preview.style.display = "none";
+  }
+  document.getElementById("upload-status").innerHTML = `Drag & drop your wallpaper image here, or <span style="color:var(--accent);text-decoration:underline;">browse files</span>`;
+
   loadAppearanceFields();
   renderFolderList();
   updateMockPreview();
@@ -401,6 +627,7 @@ function bindAll() {
 
   // GitHub
   document.getElementById("save-gh-btn").addEventListener("click", saveGithub);
+  document.getElementById("clear-gh-btn").addEventListener("click", clearGithub);
   document.getElementById("sync-now-btn").addEventListener("click", syncNow);
 
   // Appearance controls - Save button
@@ -416,6 +643,14 @@ function bindAll() {
   });
   document.getElementById("bg-color").addEventListener("input", updateMockPreview);
   document.getElementById("bg-gradient").addEventListener("input", updateMockPreview);
+  document.getElementById("bg-wallpaper-url").addEventListener("input", updateMockPreview);
+  
+  // Font selectors
+  document.getElementById("font-select").addEventListener("change", e => {
+    toggleFontFields(e.target.value);
+    updateMockPreview();
+  });
+  document.getElementById("custom-font-name").addEventListener("input", updateMockPreview);
 
   document.querySelectorAll(".col-chip").forEach(chip => {
     chip.addEventListener("click", () => {
@@ -434,6 +669,17 @@ function bindAll() {
   // Text size slider — live label & preview updates
   document.getElementById("text-size-slider").addEventListener("input", e => {
     document.getElementById("text-size-val").textContent = e.target.value + "px";
+    updateMockPreview();
+  });
+
+  // Wallpaper Sliders
+  document.getElementById("bg-blur-slider").addEventListener("input", e => {
+    document.getElementById("bg-blur-val").textContent = e.target.value + "px";
+    updateMockPreview();
+  });
+
+  document.getElementById("bg-dim-slider").addEventListener("input", e => {
+    document.getElementById("bg-dim-val").textContent = e.target.value + "%";
     updateMockPreview();
   });
 

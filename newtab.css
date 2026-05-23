@@ -48,12 +48,34 @@
 /* ── Base ────────────────────────────────────────────────────────────────── */
 html, body {
   height: 100%;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-family, Georgia, "Times New Roman", Times, serif);
   background: var(--bg);
   color: var(--text);
   font-size: var(--text-size);
   line-height: 1.5;
   transition: background var(--transition), color var(--transition);
+}
+
+/* ── Wallpaper Background Layers ─────────────────────────────────────────── */
+.wallpaper-overlay {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(var(--bg-blur, 0px));
+  transform: scale(1.04); /* scale keeps blurred borders crisp outside the frame */
+  transition: filter var(--transition), background-image 0.3s ease;
+  z-index: -2;
+  display: none;
+}
+.dim-veil {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--bg-dim, 0));
+  transition: background var(--transition);
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* ── Topbar ──────────────────────────────────────────────────────────────── */
