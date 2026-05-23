@@ -179,6 +179,15 @@
       "pinned": false,
       "title": "Amazon",
       "url": "https://www.amazon.in/"
+    },
+    {
+      "id": "d1779541102652",
+      "title": "Claude",
+      "url": "https://claude.ai/",
+      "folder": "root",
+      "index": 9,
+      "pinned": false,
+      "customIcon": ""
     }
   ],
   "folders": [
