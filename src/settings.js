@@ -393,8 +393,10 @@ function showStatus(el, type, msg) {
 function bindAll() {
   // Back link
   document.getElementById("back-link").addEventListener("click", e => {
-    e.preventDefault();
-    window.close ? window.close() : history.back();
+    if (window.innerWidth < 540) {
+      e.preventDefault();
+      window.close();
+    }
   });
 
   // GitHub
