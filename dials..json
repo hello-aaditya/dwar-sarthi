@@ -172,13 +172,13 @@
       "url": "https://www.wikipedia.org/"
     },
     {
-      "id": "d1779540978281",
-      "title": "Amazon",
-      "url": "https://www.amazon.in/",
+      "customIcon": "",
       "folder": "root",
+      "id": "d1779540978281",
       "index": 8,
       "pinned": false,
-      "customIcon": ""
+      "title": "Amazon",
+      "url": "https://www.amazon.in/"
     }
   ],
   "folders": [
@@ -214,7 +214,7 @@
     "backgroundImage": "",
     "backgroundType": "gradient",
     "cardSize": 0.7,
-    "columns": 8,
+    "columns": 12,
     "faviconService": "google",
     "searchEngine": "https://www.google.com/search?q=",
     "showLabels": true,
