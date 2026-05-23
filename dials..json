@@ -206,7 +206,7 @@
     "backgroundType": "gradient",
     "cardSize": 0.7,
     "columns": 12,
-    "faviconService": "duckduckgo",
+    "faviconService": "google",
     "searchEngine": "https://www.google.com/search?q=",
     "showLabels": true,
     "showSearch": true,
