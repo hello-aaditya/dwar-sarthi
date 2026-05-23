@@ -165,15 +165,6 @@
     {
       "customIcon": "",
       "folder": "root",
-      "id": "d1779540941918",
-      "index": 7,
-      "pinned": false,
-      "title": "Wikipedia",
-      "url": "https://www.wikipedia.org/"
-    },
-    {
-      "customIcon": "",
-      "folder": "root",
       "id": "d1779540978281",
       "index": 8,
       "pinned": false,
@@ -181,13 +172,13 @@
       "url": "https://www.amazon.in/"
     },
     {
-      "id": "d1779541102652",
-      "title": "Claude",
-      "url": "https://claude.ai/",
+      "customIcon": "",
       "folder": "root",
+      "id": "d1779541102652",
       "index": 9,
       "pinned": false,
-      "customIcon": ""
+      "title": "Claude",
+      "url": "https://claude.ai/"
     }
   ],
   "folders": [
