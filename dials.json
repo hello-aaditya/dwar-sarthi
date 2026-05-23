@@ -328,7 +328,7 @@
     "backgroundColor": "#0a0a0c",
     "backgroundGradient": "radial-gradient(circle at center, #16161a 0%, #0a0a0c 100%)",
     "backgroundImage": "",
-    "backgroundType": "gradient",
+    "backgroundType": "default",
     "cardSize": 0.7,
     "columns": 12,
     "customFont": "",
