@@ -177,16 +177,16 @@
     }
   ],
   "settings": {
-    "backgroundColor": "",
+    "backgroundColor": "#f5f5f7",
     "backgroundGradient": "",
     "backgroundImage": "",
     "backgroundType": "color",
-    "columns": 6,
+    "columns": 8,
     "faviconService": "google",
     "searchEngine": "https://www.google.com/search?q=",
     "showLabels": true,
     "showSearch": true,
-    "theme": "dark"
+    "theme": "light"
   },
   "version": 1
 }
