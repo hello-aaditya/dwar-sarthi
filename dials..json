@@ -165,29 +165,29 @@
   ],
   "folders": [
     {
-      "id": "root",
+      "id": "f1779537824286",
       "index": 0,
+      "name": "Home"
+    },
+    {
+      "id": "root",
+      "index": 1,
       "name": "Root"
     },
     {
       "id": "ai",
-      "index": 1,
+      "index": 2,
       "name": "AI Tools"
     },
     {
       "id": "jobs",
-      "index": 2,
+      "index": 3,
       "name": "Job Hunt"
     },
     {
       "id": "dev",
-      "index": 3,
-      "name": "Dev"
-    },
-    {
-      "id": "f1779537824286",
       "index": 4,
-      "name": "Home"
+      "name": "Dev"
     }
   ],
   "settings": {
