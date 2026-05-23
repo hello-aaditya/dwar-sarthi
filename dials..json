@@ -201,7 +201,7 @@
     "searchEngine": "https://www.google.com/search?q=",
     "showLabels": true,
     "showSearch": true,
-    "textSize": 12,
+    "textSize": 10,
     "theme": "dark"
   },
   "version": 1
