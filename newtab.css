@@ -30,19 +30,19 @@
 
 [data-theme="dark"] {
   --bg:          #0a0a0c;
-  --bg-card:     rgba(22, 22, 26, 0.45);
-  --bg-modal:    #0f0f12;
-  --bg-input:    rgba(30, 30, 36, 0.45);
-  --bg-folder:   rgba(30, 30, 36, 0.25);
+  --bg-card:     rgba(28, 28, 35, 0.7);
+  --bg-modal:    #121215;
+  --bg-input:    rgba(38, 38, 45, 0.5);
+  --bg-folder:   rgba(38, 38, 45, 0.3);
   --text:        #ffffff;
   --text-muted:  #a0a0b0;
   --text-label:  #f0f0f5;
   --accent:      #8c4fc4;
   --accent-h:    #a66ee0;
-  --border:      rgba(175, 115, 235, 0.12);
-  --border-card: rgba(175, 115, 235, 0.08);
-  --shadow:      0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-h:    0 8px 32px rgba(140, 80, 200, 0.2);
+  --border:      rgba(255, 255, 255, 0.08);
+  --border-card: rgba(255, 255, 255, 0.08);
+  --shadow:      0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-h:    0 8px 32px rgba(140, 80, 200, 0.25);
 }
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
