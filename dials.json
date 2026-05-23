@@ -58,7 +58,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h7",
-      "index": 7,
+      "index": 6,
       "pinned": false,
       "title": "Notion",
       "url": "https://www.notion.so/"
@@ -67,7 +67,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h8",
-      "index": 8,
+      "index": 7,
       "pinned": false,
       "title": "ChatGPT",
       "url": "https://chatgpt.com/"
@@ -76,7 +76,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h9",
-      "index": 9,
+      "index": 8,
       "pinned": false,
       "title": "Claude",
       "url": "https://claude.ai/"
@@ -85,7 +85,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h10",
-      "index": 10,
+      "index": 9,
       "pinned": false,
       "title": "DeepSeek",
       "url": "https://chat.deepseek.com/"
@@ -94,7 +94,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h11",
-      "index": 11,
+      "index": 10,
       "pinned": false,
       "title": "Mistral AI",
       "url": "https://chat.mistral.ai/"
@@ -103,7 +103,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h12",
-      "index": 12,
+      "index": 11,
       "pinned": false,
       "title": "Gemini",
       "url": "https://gemini.google.com/"
@@ -112,7 +112,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h13",
-      "index": 13,
+      "index": 12,
       "pinned": false,
       "title": "LeetCode",
       "url": "https://leetcode.com/"
@@ -121,7 +121,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h14",
-      "index": 14,
+      "index": 13,
       "pinned": false,
       "title": "Draw.io",
       "url": "https://app.diagrams.net/"
@@ -130,7 +130,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h15",
-      "index": 15,
+      "index": 14,
       "pinned": false,
       "title": "Excalidraw",
       "url": "https://excalidraw.com/"
@@ -139,7 +139,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h16",
-      "index": 16,
+      "index": 15,
       "pinned": false,
       "title": "Overleaf",
       "url": "https://www.overleaf.com/"
@@ -148,7 +148,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h17",
-      "index": 17,
+      "index": 16,
       "pinned": false,
       "title": "Reddit",
       "url": "https://www.reddit.com/"
@@ -157,7 +157,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h18",
-      "index": 18,
+      "index": 17,
       "pinned": false,
       "title": "Discord",
       "url": "https://discord.com/"
@@ -166,7 +166,7 @@
       "customIcon": "",
       "folder": "root",
       "id": "h19",
-      "index": 6,
+      "index": 18,
       "pinned": false,
       "title": "Pastebin",
       "url": "https://pastebin.com/"
