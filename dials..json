@@ -170,14 +170,14 @@
       "name": "Root"
     },
     {
-      "id": "f1779537824286",
+      "id": "ai",
       "index": 1,
-      "name": "Home"
+      "name": "AI Tools"
     },
     {
-      "id": "ai",
+      "id": "f1779537824286",
       "index": 2,
-      "name": "AI Tools"
+      "name": "Home"
     },
     {
       "id": "jobs",
