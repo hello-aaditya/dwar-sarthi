@@ -165,19 +165,19 @@
   ],
   "folders": [
     {
-      "id": "ai",
+      "id": "root",
       "index": 0,
+      "name": "Root"
+    },
+    {
+      "id": "ai",
+      "index": 1,
       "name": "AI Tools"
     },
     {
       "id": "jobs",
-      "index": 1,
-      "name": "Job Hunt"
-    },
-    {
-      "id": "root",
       "index": 2,
-      "name": "Root"
+      "name": "Job Hunt"
     },
     {
       "id": "dev",
