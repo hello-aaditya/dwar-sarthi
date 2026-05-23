@@ -29,6 +29,10 @@ async function init() {
   setupPasswordToggle();
   setupWallpaperUpload();
 
+  // Populate mock preview dynamically with user's actual dials & folders
+  renderMockFolders();
+  renderMockGrid();
+
   // Wire event handlers
   bindAll();
 
@@ -198,6 +202,8 @@ async function syncNow() {
     
     loadAppearanceFields();
     renderFolderList();
+    renderMockFolders();
+    renderMockGrid();
     updateMockPreview();
   } catch (err) {
     showStatus(status, "error", err.message);
@@ -348,6 +354,48 @@ async function saveAppearance() {
   applyGlobalFont(config.settings.fontFamily, config.settings.customFont);
   applyGlobalTheme(config.settings.theme);
   updateMockPreview();
+}
+
+function renderMockFolders() {
+  const container = document.querySelector(".device-folders");
+  if (!container || !config) return;
+  container.innerHTML = "";
+  
+  // Render up to 4 actual folder names
+  config.folders.slice(0, 4).forEach((folder, idx) => {
+    const tab = document.createElement("span");
+    tab.className = "device-folder-tab" + (idx === 0 ? " active" : "");
+    tab.textContent = folder.name;
+    container.appendChild(tab);
+  });
+}
+
+function renderMockGrid() {
+  const grid = document.getElementById("mock-grid");
+  if (!grid || !config) return;
+  grid.innerHTML = "";
+
+  // Render actual dials from the first folder (usually 'root')
+  const activeFolder = config.folders[0]?.id || "root";
+  const folderDials = config.dials.filter(d => d.folder === activeFolder).slice(0, 12);
+
+  folderDials.forEach(dial => {
+    const card = document.createElement("div");
+    card.className = "device-dial";
+
+    const iconBox = document.createElement("div");
+    iconBox.className = "device-favicon-box";
+    const letter = dial.title ? dial.title.charAt(0).toUpperCase() : "?";
+    iconBox.textContent = letter;
+
+    const label = document.createElement("span");
+    label.className = "device-dial-label";
+    label.textContent = dial.title;
+
+    card.appendChild(iconBox);
+    card.appendChild(label);
+    grid.appendChild(card);
+  });
 }
 
 // ── Live Preview Controller ────────────────────────────────────────────────
@@ -556,6 +604,8 @@ async function importConfig() {
     hideImportArea();
     loadAppearanceFields();
     renderFolderList();
+    renderMockFolders();
+    renderMockGrid();
     updateMockPreview();
     showStatus(status, result.ok ? "success" : "error",
       result.ok ? `Imported ${config.dials.length} dials ✓` : result.error);
@@ -602,6 +652,8 @@ async function resetToDefaults() {
 
   loadAppearanceFields();
   renderFolderList();
+  renderMockFolders();
+  renderMockGrid();
   updateMockPreview();
   showStatus(status, result.ok ? "success" : "error",
     result.ok ? "Reset to defaults ✓" : result.error);

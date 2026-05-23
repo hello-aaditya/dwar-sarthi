@@ -7,8 +7,8 @@ export const DEFAULT_CONFIG = {
     theme: "dark",          // default to dark mode
     columns: 6,             // grid columns
     showLabels: true,
-    cardSize: 1,            // scale factor: 0.7 – 1.5
-    textSize: 14,           // label font size in px: 10 – 24
+    cardSize: 0.7,            // scale factor: 0.7 – 1.5
+    textSize: 13,           // label font size in px: 10 – 24
     backgroundType: "gradient", 
     backgroundColor: "#0a0a0c",    
     backgroundGradient: "radial-gradient(circle at center, #16161a 0%, #0a0a0c 100%)",
