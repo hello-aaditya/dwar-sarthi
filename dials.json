@@ -325,7 +325,7 @@
     }
   ],
   "settings": {
-    "backgroundColor": "#5a5a6d",
+    "backgroundColor": "#5f3b8c",
     "backgroundGradient": "radial-gradient(circle at center, #16161a 0%, #0a0a0c 100%)",
     "backgroundImage": "",
     "backgroundType": "color",
