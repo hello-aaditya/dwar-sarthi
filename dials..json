@@ -195,7 +195,7 @@
     "backgroundGradient": "radial-gradient(circle at center, #351356 0%, #170525 100%)",
     "backgroundImage": "",
     "backgroundType": "gradient",
-    "columns": 6,
+    "columns": 8,
     "faviconService": "google",
     "searchEngine": "https://www.google.com/search?q=",
     "showLabels": true,
