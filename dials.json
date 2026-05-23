@@ -325,10 +325,10 @@
     }
   ],
   "settings": {
-    "backgroundColor": "#0a0a0c",
+    "backgroundColor": "#5a5a6d",
     "backgroundGradient": "radial-gradient(circle at center, #16161a 0%, #0a0a0c 100%)",
     "backgroundImage": "",
-    "backgroundType": "default",
+    "backgroundType": "color",
     "cardSize": 0.7,
     "columns": 12,
     "customFont": "",
@@ -338,7 +338,7 @@
     "showLabels": true,
     "showSearch": true,
     "textSize": 13,
-    "theme": "light",
+    "theme": "dark",
     "wallpaperBlur": 0,
     "wallpaperDim": 20,
     "wallpaperSource": ""
