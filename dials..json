@@ -161,6 +161,15 @@
       "pinned": false,
       "title": "ChatGPT",
       "url": "https://chatgpt.com/"
+    },
+    {
+      "id": "d1779540941918",
+      "title": "Wikipedia",
+      "url": "https://www.wikipedia.org/",
+      "folder": "root",
+      "index": 7,
+      "pinned": false,
+      "customIcon": ""
     }
   ],
   "folders": [
