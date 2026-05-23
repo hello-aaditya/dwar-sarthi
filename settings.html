@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dwar Sarthi — Settings</title>
+  <link rel="stylesheet" href="newtab.css" />
+  <style>
+    /* ── Settings Layout & Styles ───────────────────────────────────────────── */
+    body {
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", Times, serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    .settings-container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* ── Sidebar ───────────────────────────────────────────────────────────── */
+    .settings-sidebar {
+      width: 250px;
+      background: rgba(30, 10, 50, 0.4);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      transition: width var(--transition);
+      z-index: 10;
+    }
+
+    .sidebar-header {
+      padding: 24px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sidebar-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      margin: 0;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--text) 30%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sidebar-nav {
+      padding: 16px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 16px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: Georgia, serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .nav-item:hover {
+      color: var(--text);
+      background: rgba(175, 115, 235, 0.08);
+      border-color: rgba(175, 115, 235, 0.05);
+    }
+
+    .nav-item:hover svg {
+      transform: translateX(2px);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(180deg, #533b70 0%, #2b173e 100%) !important;
+      border: 1px solid rgba(175, 115, 235, 0.2) !important;
+      color: #d8eaff !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .nav-item.active svg {
+      color: #af73eb;
+      transform: scale(1.05);
+    }
+
+    /* ── Content Area ──────────────────────────────────────────────────────── */
+    .settings-content {
+      flex: 1;
+      overflow-y: auto;
+      background: radial-gradient(circle at 80% 20%, rgba(140, 80, 200, 0.03) 0%, transparent 50%), var(--bg);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .settings-panel {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .settings-panel.active {
+      display: block;
+    }
+
+    .settings-panel.wide-panel {
+      max-width: 1100px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 24px 0;
+      color: var(--text);
+    }
+
+    .section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    /* ── Form Styling ──────────────────────────────────────────────────────── */
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    .field label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-label);
+      margin-bottom: 8px;
+    }
+
+    .field label span.value-badge {
+      background: rgba(140, 80, 200, 0.15);
+      color: #cbb6dd;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    [data-theme="light"] .field label span.value-badge {
+      background: rgba(92, 107, 192, 0.1);
+      color: var(--accent);
+    }
+
+    .field input[type="text"],
+    .field input[type="password"],
+    .field select {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text);
+      font-family: Georgia, serif;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .field input[type="text"]:focus,
+    .field input[type="password"]:focus,
+    .field select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(140, 80, 200, 0.15);
+      background: var(--bg-card);
+    }
+
+    .field input[type="password"] {
+      font-family: monospace;
+      letter-spacing: 0.12em;
+    }
+
+    .help-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    .help-text a {
+      color: #af73eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .help-text a:hover {
+      text-decoration: underline;
+    }
+
+    .inline-row {
+      display: flex;
+      gap: 16px;
+    }
+
+    .inline-row .field {
+      flex: 1;
+    }
+
+    /* ── Action Buttons ────────────────────────────────────────────────────── */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary, .btn-ghost, .btn-danger {
+      padding: 10px 22px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: Georgia, serif;
+      transition: all 0.2s;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #8c4fc4 0%, #68309c 100%);
+      color: #ffffff;
+      border: 1px solid rgba(175, 115, 235, 0.25);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 4px 10px rgba(140, 80, 200, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-ghost {
+      background: rgba(140, 80, 200, 0.08);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      background: rgba(140, 80, 200, 0.16);
+      border-color: rgba(175, 115, 235, 0.2);
+    }
+
+    .btn-danger {
+      background: rgba(239, 83, 80, 0.08);
+      color: var(--danger);
+      border: 1px solid rgba(239, 83, 80, 0.15);
+    }
+
+    .btn-danger:hover {
+      background: rgba(239, 83, 80, 0.18);
+      border-color: rgba(239, 83, 80, 0.3);
+      color: #ff7673;
+    }
+
+    .status-msg {
+      font-size: 13px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      margin-top: 14px;
+      display: none;
+      animation: fadeIn 0.2s ease-out;
+      font-weight: 500;
+    }
+
+    .status-msg.success {
+      background: rgba(67, 160, 71, 0.12);
+      color: var(--success);
+      border: 1px solid rgba(67, 160, 71, 0.2);
+      display: block;
+    }
+
+    .status-msg.error {
+      background: rgba(239, 83, 80, 0.12);
+      color: var(--danger);
+      border: 1px solid rgba(239, 83, 80, 0.2);
+      display: block;
+    }
+
+    /* ── Toggles ───────────────────────────────────────────────────────────── */
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(175, 115, 235, 0.06);
+    }
+
+    .toggle-row:last-of-type {
+      border-bottom: none;
+      margin-bottom: 14px;
+    }
+
+    .toggle-row label {
+      font-size: 14px;
+      color: var(--text-label);
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-track {
+      position: absolute;
+      inset: 0;
+      background: var(--border);
+      border: 1px solid rgba(175,115,235,0.05);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .toggle input:checked ~ .toggle-track {
+      background: linear-gradient(135deg, #8c4fc4 0%, #5c209c 100%);
+      border-color: rgba(175, 115, 235, 0.2);
+    }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #ffffff;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .toggle input:checked ~ .toggle-thumb {
+      transform: translateX(20px);
+    }
+
+    /* ── Range Sliders ─────────────────────────────────────────────────────── */
+    .field input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      outline: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .field input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #7c4dba 0%, #4a2880 100%);
+      border: 2px solid rgba(175, 115, 235, 0.5);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      cursor: grab;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .field input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 2px 10px rgba(140, 80, 200, 0.5);
+    }
+
+    .field input[type="range"]::-webkit-slider-thumb:active {
+      cursor: grabbing;
+      transform: scale(1.05);
+    }
+
+    .field input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #7c4dba 0%, #4a2880 100%);
+      border: 2px solid rgba(175, 115, 235, 0.5);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      cursor: grab;
+    }
+
+    /* ── Columns chips ──────────────────────────────────────────────────────── */
+    .columns-preview {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .col-chip {
+      flex: 1;
+      height: 32px;
+      border-radius: 6px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: Georgia, serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .col-chip:hover {
+      background: rgba(140, 80, 200, 0.1);
+      border-color: rgba(140, 80, 200, 0.3);
+      color: var(--text);
+    }
+
+    .col-chip.active {
+      background: linear-gradient(135deg, #8c4fc4 0%, #5c209c 100%);
+      border-color: rgba(175, 115, 235, 0.2);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(140, 80, 200, 0.3);
+    }
+
+    /* ── Folders & Data List ────────────────────────────────────────────────── */
+    .folder-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .folder-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      transition: border-color var(--transition);
+    }
+
+    .folder-row:focus-within {
+      border-color: var(--accent);
+      background: var(--bg-card);
+    }
+
+    .folder-row input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 14px;
+      font-family: Georgia, serif;
+      outline: none;
+    }
+
+    .folder-row .del-folder {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .folder-row .del-folder:hover {
+      color: var(--danger);
+      background: rgba(239, 83, 80, 0.1);
+    }
+
+    .folder-row .del-folder svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .import-area {
+      width: 100%;
+      min-height: 120px;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      border: 1.5px dashed var(--border);
+      background: var(--bg-input);
+      color: var(--text);
+      font-size: 13px;
+      font-family: monospace;
+      resize: vertical;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .import-area:focus {
+      border-color: var(--accent);
+      background: var(--bg-card);
+      border-style: solid;
+    }
+
+    /* ── Live Preview Grid System ───────────────────────────────────────────── */
+    .appearance-split {
+      display: flex;
+      gap: 36px;
+    }
+
+    .appearance-controls {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .preview-container {
+      width: 380px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .preview-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .preview-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── The Mock Web Browser Page ──────────────────────────────────────────── */
+    .preview-device {
+      width: 100%;
+      aspect-ratio: 16 / 11;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.35);
+      background: var(--bg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: background 0.3s;
+      transform-origin: top center;
+    }
+
+    .device-header {
+      height: 28px;
+      background: rgba(0, 0, 0, 0.15);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 6px;
+    }
+
+    .device-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .device-search-bar {
+      flex: 1;
+      max-width: 140px;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .device-search-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .device-body {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow: hidden;
+      transform: scale(0.9);
+      transform-origin: center center;
+    }
+
+    .device-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 20px;
+    }
+
+    .device-greeting {
+      width: 70px;
+      height: 8px;
+      background: var(--text-muted);
+      opacity: 0.3;
+      border-radius: 4px;
+    }
+
+    .device-actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    .device-icon-btn {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      opacity: 0.25;
+    }
+
+    /* Mock Search engine box */
+    .device-search-box {
+      width: 100%;
+      max-width: 240px;
+      height: 24px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 6px;
+      opacity: 0.9;
+    }
+
+    .device-search-icon {
+      width: 8px;
+      height: 8px;
+      border: 1.5px solid var(--text-muted);
+      border-radius: 50%;
+      opacity: 0.4;
+      position: relative;
+    }
+
+    .device-search-icon::after {
+      content: "";
+      position: absolute;
+      width: 4px;
+      height: 1.5px;
+      background: var(--text-muted);
+      bottom: -2px;
+      right: -2px;
+      transform: rotate(45deg);
+    }
+
+    .device-search-text {
+      width: 40px;
+      height: 6px;
+      background: var(--text-muted);
+      opacity: 0.25;
+      border-radius: 3px;
+    }
+
+    /* Mock Folder Tabs */
+    .device-folders {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .device-folder-tab {
+      padding: 3px 8px;
+      font-size: 8px;
+      font-weight: 600;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: rgba(60, 24, 95, 0.15);
+      color: var(--text-muted);
+      opacity: 0.8;
+    }
+
+    .device-folder-tab.active {
+      background: linear-gradient(180deg, #533b70 0%, #2b173e 100%) !important;
+      border: 1px solid rgba(175, 115, 235, 0.15) !important;
+      color: #d8eaff !important;
+    }
+
+    /* Mock Dials Grid */
+    .device-grid-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .device-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--mock-cols, 6), 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+
+    .device-dial {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 6px;
+      padding: calc(8px * var(--mock-card-size, 1)) calc(4px * var(--mock-card-size, 1));
+      box-shadow: var(--shadow);
+      gap: calc(4px * var(--mock-card-size, 1));
+      text-decoration: none;
+    }
+
+    .device-favicon-box {
+      width: calc(18px * var(--mock-card-size, 1));
+      height: calc(18px * var(--mock-card-size, 1));
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(8px * var(--mock-card-size, 1));
+      font-weight: 800;
+      background: rgba(140, 80, 200, 0.12);
+      color: #cbb6dd;
+      transition: all 0.2s;
+    }
+
+    [data-theme="light"] .device-favicon-box {
+      background: rgba(92,107,192,0.1);
+      color: var(--accent);
+    }
+
+    .device-dial-label {
+      font-size: calc(var(--mock-text-size, 14px) * 0.55);
+      color: var(--text-label);
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* Custom Scrollbar for Settings */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(175, 115, 235, 0.12);
+      border-radius: 99px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(175, 115, 235, 0.24);
+    }
+
+    /* ── Responsive Adaptations ────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .settings-sidebar {
+        width: 70px;
+      }
+      .sidebar-header {
+        padding: 20px 10px;
+        align-items: center;
+      }
+      .sidebar-title,
+      .nav-item span {
+        display: none;
+      }
+      .back-btn span {
+        display: none;
+      }
+      .back-btn {
+        padding: 8px;
+        border-radius: 50%;
+      }
+      .back-btn svg {
+        margin: 0;
+      }
+      .nav-item {
+        justify-content: center;
+        padding: 12px;
+      }
+      .nav-item svg {
+        width: 20px;
+        height: 20px;
+      }
+      .appearance-split {
+        flex-direction: column-reverse;
+        gap: 30px;
+      }
+      .preview-container {
+        width: 100%;
+      }
+      .preview-device {
+        max-width: 440px;
+        margin: 0 auto;
+      }
+    }
+
+    /* Special rule for extremely small window viewports e.g. the standard browser extension popup (400x600px) */
+    @media (max-width: 540px) {
+      .settings-content {
+        padding: 20px;
+      }
+      .panel-title {
+        font-size: 20px;
+        margin-bottom: 16px;
+      }
+      .section {
+        padding: 18px;
+        border-radius: var(--radius-sm);
+      }
+      .inline-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      .preview-container {
+        display: none; /* Hide preview on tiny popup viewports */
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="settings-container">
+
+  <!-- Sidebar Navigation -->
+  <aside class="settings-sidebar">
+    <div class="sidebar-header">
+      <a class="back-btn" href="#" id="back-link" title="Back to New Tab">
+        <svg viewBox="0 0 16 16" fill="none">
+          <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Back</span>
+      </a>
+      <h2 class="sidebar-title">Dwar Sarthi</h2>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-panel="sync">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+        </svg>
+        <span>GitHub Sync</span>
+      </button>
+      <button class="nav-item" data-panel="appearance">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <span>Appearance</span>
+      </button>
+      <button class="nav-item" data-panel="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <span>Search Engine</span>
+      </button>
+      <button class="nav-item" data-panel="folders">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+        </svg>
+        <span>Folders</span>
+      </button>
+      <button class="nav-item" data-panel="data">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </svg>
+        <span>Import / Export</span>
+      </button>
+      <button class="nav-item" data-panel="danger">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>
+        </svg>
+        <span>Danger Zone</span>
+      </button>
+    </nav>
+  </aside>
+
+  <!-- Main Content Panels -->
+  <main class="settings-content">
+
+    <!-- ── PANEL: GITHUB SYNC ── -->
+    <section id="panel-sync" class="settings-panel active">
+      <h2 class="panel-title">GitHub Sync</h2>
+      
+      <div class="section">
+        <div class="section-title">Connection Parameters</div>
+
+        <div class="field">
+          <label>Personal Access Token (PAT)</label>
+          <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
+          <p class="help-text">
+            Generate a token on
+            <a href="https://github.com/settings/tokens/new?scopes=public_repo&description=speed-dial-sync" target="_blank">
+              github.com/settings/tokens
+            </a>
+            — select <strong>public_repo</strong> scope (or full <strong>repo</strong> if it's a private repo).
+          </p>
+        </div>
+
+        <div class="inline-row">
+          <div class="field">
+            <label>GitHub Username</label>
+            <input type="text" id="gh-owner" placeholder="your-username" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label>Repository Name</label>
+            <input type="text" id="gh-repo" placeholder="speed-dial-sync" autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>File Path in Repository</label>
+          <input type="text" id="gh-path" placeholder="dials.json" autocomplete="off" />
+          <p class="help-text">We recommend leaving this as <code>dials.json</code>.</p>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-primary" id="save-gh-btn">Save & Test Connection</button>
+          <button class="btn-ghost" id="sync-now-btn">Sync Now</button>
+        </div>
+        
+        <div class="status-msg" id="gh-status"></div>
+      </div>
+    </section>
+
+    <!-- ── PANEL: APPEARANCE (Wide Layout with Side-by-Side Live Preview) ── -->
+    <section id="panel-appearance" class="settings-panel wide-panel">
+      <h2 class="panel-title">Appearance Settings</h2>
+      
+      <div class="appearance-split">
+        <!-- Controls Column (Left) -->
+        <div class="appearance-controls">
+          <div class="section">
+            <div class="section-title">Layout & Controls</div>
+
+            <div class="toggle-row">
+              <label for="show-search">Show Search Bar</label>
+              <label class="toggle">
+                <input type="checkbox" id="show-search" />
+                <span class="toggle-track"></span>
+                <span class="toggle-thumb"></span>
+              </label>
+            </div>
+
+            <div class="toggle-row">
+              <label for="show-labels">Show Dial Labels</label>
+              <label class="toggle">
+                <input type="checkbox" id="show-labels" />
+                <span class="toggle-track"></span>
+                <span class="toggle-thumb"></span>
+              </label>
+            </div>
+
+            <div class="field" style="margin-top: 14px;">
+              <label for="card-size-slider">
+                <span>Card Size Factor</span>
+                <span class="value-badge" id="card-size-val">1.00×</span>
+              </label>
+              <input type="range" id="card-size-slider" min="0.7" max="1.5" step="0.05" value="1" />
+              <p class="help-text">Scales dials from 0.7× (very compact) to 1.5× (large cards).</p>
+            </div>
+
+            <div class="field">
+              <label for="text-size-slider">
+                <span>Text Size</span>
+                <span class="value-badge" id="text-size-val">14px</span>
+              </label>
+              <input type="range" id="text-size-slider" min="10" max="24" step="1" value="14" />
+              <p class="help-text">Font size range for labels from 10px to 24px.</p>
+            </div>
+
+            <div class="field">
+              <label for="cols-preview">Desktop Columns Layout</label>
+              <div class="columns-preview" id="cols-preview">
+                <button class="col-chip" data-cols="4" title="4 columns">4</button>
+                <button class="col-chip" data-cols="5" title="5 columns">5</button>
+                <button class="col-chip" data-cols="6" title="6 columns">6</button>
+                <button class="col-chip" data-cols="7" title="7 columns">7</button>
+                <button class="col-chip" data-cols="8" title="8 columns">8</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Theme & Canvas</div>
+
+            <div class="field">
+              <label for="theme-select">Theme Style</label>
+              <select id="theme-select">
+                <option value="auto">Auto (Match System)</option>
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="favicon-service">Favicon Service API</label>
+              <select id="favicon-service">
+                <option value="google">Google API (Slightly faster)</option>
+                <option value="duckduckgo">DuckDuckGo API (More private)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="bg-type">Canvas Background</label>
+              <select id="bg-type">
+                <option value="color">Solid color</option>
+                <option value="gradient">Gradient</option>
+                <option value="default">Theme default</option>
+              </select>
+            </div>
+
+            <div class="field" id="bg-color-field">
+              <label for="bg-color">Solid Background Color</label>
+              <input type="color" id="bg-color" value="#220a37" />
+            </div>
+
+            <div class="field" id="bg-gradient-field" style="display:none">
+              <label for="bg-gradient">CSS Gradient Value</label>
+              <input type="text" id="bg-gradient" placeholder="linear-gradient(135deg, #1a1a2e, #16213e)" />
+            </div>
+
+            <div class="btn-row">
+              <button class="btn-primary" id="save-appearance-btn">Save Appearance</button>
+            </div>
+            
+            <div class="status-msg" id="appearance-status"></div>
+          </div>
+        </div>
+
+        <!-- Live Preview Panel (Right) -->
+        <div class="preview-container">
+          <div class="preview-label">Live Preview</div>
+          
+          <!-- Mock Screen -->
+          <div class="preview-device" id="preview-device">
+            <!-- Browser Header -->
+            <div class="device-header">
+              <div class="device-dot"></div>
+              <div class="device-dot"></div>
+              <div class="device-dot"></div>
+              <div class="device-search-bar">
+                <div class="device-search-dot"></div>
+              </div>
+            </div>
+
+            <!-- Page Canvas -->
+            <div class="device-body">
+              <div class="device-topbar">
+                <div class="device-greeting"></div>
+                <div class="device-actions">
+                  <div class="device-icon-btn"></div>
+                  <div class="device-icon-btn"></div>
+                </div>
+              </div>
+
+              <!-- Mock Search Box -->
+              <div class="device-search-box" id="mock-search-box">
+                <div class="device-search-icon"></div>
+                <div class="device-search-text"></div>
+              </div>
+
+              <!-- Mock Folder Tabs -->
+              <div class="device-folders">
+                <span class="device-folder-tab active">Root</span>
+                <span class="device-folder-tab">AI Tools</span>
+                <span class="device-folder-tab">Dev</span>
+              </div>
+
+              <!-- Mock Card Grid -->
+              <div class="device-grid-wrap">
+                <div class="device-grid" id="mock-grid">
+                  <div class="device-dial">
+                    <div class="device-favicon-box">Y</div>
+                    <span class="device-dial-label">YouTube</span>
+                  </div>
+                  <div class="device-dial">
+                    <div class="device-favicon-box">G</div>
+                    <span class="device-dial-label">Gmail</span>
+                  </div>
+                  <div class="device-dial">
+                    <div class="device-favicon-box">D</div>
+                    <span class="device-dial-label">Drive</span>
+                  </div>
+                  <div class="device-dial">
+                    <div class="device-favicon-box">G</div>
+                    <span class="device-dial-label">GitHub</span>
+                  </div>
+                  <div class="device-dial">
+                    <div class="device-favicon-box">L</div>
+                    <span class="device-dial-label">LinkedIn</span>
+                  </div>
+                  <div class="device-dial">
+                    <div class="device-favicon-box">N</div>
+                    <span class="device-dial-label">Notion</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PANEL: SEARCH ENGINE ── -->
+    <section id="panel-search" class="settings-panel">
+      <h2 class="panel-title">Search Engine Options</h2>
+      
+      <div class="section">
+        <div class="section-title">Query Template</div>
+        
+        <div class="field">
+          <label for="search-engine">Search Query Endpoint (using %s)</label>
+          <input type="text" id="search-engine" placeholder="https://www.google.com/search?q=" />
+        </div>
+
+        <div class="field">
+          <label>One-Click Provider Presets</label>
+          <div class="btn-row" style="margin-top: 4px;">
+            <button class="btn-ghost" data-engine="https://www.google.com/search?q=">Google</button>
+            <button class="btn-ghost" data-engine="https://duckduckgo.com/?q=">DuckDuckGo</button>
+            <button class="btn-ghost" data-engine="https://search.brave.com/search?q=">Brave</button>
+            <button class="btn-ghost" data-engine="https://bing.com/search?q=">Bing</button>
+          </div>
+        </div>
+
+        <div class="btn-row" style="margin-top: 24px;">
+          <button class="btn-primary" id="save-search-btn">Save Search Engine</button>
+        </div>
+
+        <div class="status-msg" id="search-status"></div>
+      </div>
+    </section>
+
+    <!-- ── PANEL: FOLDERS ── -->
+    <section id="panel-folders" class="settings-panel">
+      <h2 class="panel-title">Folders Configuration</h2>
+      
+      <div class="section">
+        <div class="section-title">Add / Edit Folders</div>
+        <p class="help-text" style="margin-bottom: 20px;">
+          Add custom categories to group dials together. You can re-order folder tabs directly on the New Tab page by dragging them.
+        </p>
+
+        <div class="folder-list" id="folder-list"></div>
+
+        <div class="btn-row" style="margin-top: 24px;">
+          <button class="btn-ghost" id="add-folder-btn">+ Add Folder</button>
+          <button class="btn-primary" id="save-folders-btn">Save Folder Names</button>
+        </div>
+
+        <div class="status-msg" id="folders-status"></div>
+      </div>
+    </section>
+
+    <!-- ── PANEL: IMPORT / EXPORT ── -->
+    <section id="panel-data" class="settings-panel">
+      <h2 class="panel-title">Backup & Portability</h2>
+      
+      <div class="section">
+        <div class="section-title">Import & Export Dials</div>
+        <p class="help-text" style="margin-bottom: 18px;">
+          Keep local copies of your speed dial configuration. You can export everything to a single <code>dials.json</code> file or import a previous backup. 
+          Additionally, you can paste a YASD export text directly here to migrate your dials.
+        </p>
+
+        <div class="btn-row">
+          <button class="btn-ghost" id="export-btn">Export dials.json</button>
+          <button class="btn-ghost" id="import-trigger">Import JSON Configuration</button>
+        </div>
+
+        <textarea class="import-area" id="import-area" placeholder="Paste dials.json content here and click Import..." style="margin-top: 20px; display: none;"></textarea>
+        
+        <div class="btn-row" id="import-confirm-row" style="display: none;">
+          <button class="btn-primary" id="import-confirm-btn">Confirm Import</button>
+          <button class="btn-ghost" id="import-cancel-btn">Cancel</button>
+        </div>
+
+        <div class="status-msg" id="import-status"></div>
+      </div>
+    </section>
+
+    <!-- ── PANEL: DANGER ZONE ── -->
+    <section id="panel-danger" class="settings-panel">
+      <h2 class="panel-title">Danger Zone</h2>
+      
+      <div class="section" style="border-color: rgba(239, 83, 80, 0.25);">
+        <div class="section-title" style="color: var(--danger);">Destructive Operations</div>
+        <p class="help-text" style="margin-bottom: 20px; color: var(--text-muted);">
+          Reset all of your bookmarks and folder categories back to their initial factory settings. 
+          This will overwrite any local customizations instantly. If connected to GitHub, the current remote content will be updated upon the next push (although GitHub will keep a history of edits).
+        </p>
+
+        <button class="btn-danger" id="reset-btn">Reset to Defaults</button>
+        
+        <div class="status-msg" id="reset-status"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+<script type="module" src="src/settings.js"></script>
+</body>
+</html>
