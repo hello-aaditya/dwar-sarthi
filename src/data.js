@@ -18,83 +18,151 @@ export const DEFAULT_CONFIG = {
     faviconService: "google" // "google" | "duckduckgo"
   },
   folders: [
-    { id: "root", name: "Root", index: 0 },
-    { id: "ai",   name: "AI Tools", index: 1 },
-    { id: "jobs", name: "Job Hunt", index: 2 },
-    { id: "dev",  name: "Dev", index: 3 }
+    { id: "root",   name: "Home",            index: 0 },
+    { id: "dev",    name: "In development",  index: 1 },
+    { id: "career", name: "Career",          index: 2 }
   ],
   dials: [
-    // — Utilities (root) —
+    // ── Home Folder (root) ──────────────────────────────────────────────────
     {
-      id: "d1", title: "YouTube", url: "https://youtube.com/",
+      id: "h1", title: "Speedtest", url: "https://www.speedtest.net/",
       folder: "root", index: 0, pinned: false, customIcon: ""
     },
     {
-      id: "d2", title: "Gmail", url: "https://mail.google.com/",
+      id: "h2", title: "YouTube", url: "https://www.youtube.com/",
       folder: "root", index: 1, pinned: false, customIcon: ""
     },
     {
-      id: "d3", title: "Drive", url: "https://drive.google.com/",
+      id: "h3", title: "Gmail", url: "https://mail.google.com/",
       folder: "root", index: 2, pinned: false, customIcon: ""
     },
     {
-      id: "d4", title: "LinkedIn", url: "https://linkedin.com/",
+      id: "h4", title: "Drive", url: "https://drive.google.com/",
       folder: "root", index: 3, pinned: false, customIcon: ""
     },
     {
-      id: "d5", title: "GitHub", url: "https://github.com/",
+      id: "h5", title: "LinkedIn", url: "https://www.linkedin.com/",
       folder: "root", index: 4, pinned: false, customIcon: ""
     },
     {
-      id: "d6", title: "Notion", url: "https://notion.so/",
+      id: "h6", title: "GitHub", url: "https://github.com/",
       folder: "root", index: 5, pinned: false, customIcon: ""
     },
-    // — AI Tools —
     {
-      id: "d7", title: "ChatGPT", url: "https://chatgpt.com/",
-      folder: "ai", index: 0, pinned: false, customIcon: ""
+      id: "h7", title: "Notion", url: "https://www.notion.so/",
+      folder: "root", index: 6, pinned: false, customIcon: ""
     },
     {
-      id: "d8", title: "Claude", url: "https://claude.ai/",
-      folder: "ai", index: 1, pinned: false, customIcon: ""
+      id: "h8", title: "ChatGPT", url: "https://chatgpt.com/",
+      folder: "root", index: 7, pinned: false, customIcon: ""
     },
     {
-      id: "d9", title: "DeepSeek", url: "https://chat.deepseek.com/",
-      folder: "ai", index: 2, pinned: false, customIcon: ""
+      id: "h9", title: "Claude", url: "https://claude.ai/",
+      folder: "root", index: 8, pinned: false, customIcon: ""
     },
     {
-      id: "d10", title: "Gemini", url: "https://gemini.google.com/",
-      folder: "ai", index: 3, pinned: false, customIcon: ""
+      id: "h10", title: "DeepSeek", url: "https://chat.deepseek.com/",
+      folder: "root", index: 9, pinned: false, customIcon: ""
     },
     {
-      id: "d11", title: "Mistral", url: "https://chat.mistral.ai/",
-      folder: "ai", index: 4, pinned: false, customIcon: ""
-    },
-    // — Job Hunt —
-    {
-      id: "d12", title: "Naukri", url: "https://naukri.com/",
-      folder: "jobs", index: 0, pinned: false, customIcon: ""
+      id: "h11", title: "Mistral AI", url: "https://chat.mistral.ai/",
+      folder: "root", index: 10, pinned: false, customIcon: ""
     },
     {
-      id: "d13", title: "Glassdoor", url: "https://glassdoor.com/",
-      folder: "jobs", index: 1, pinned: false, customIcon: ""
+      id: "h12", title: "Gemini", url: "https://gemini.google.com/",
+      folder: "root", index: 11, pinned: false, customIcon: ""
     },
     {
-      id: "d14", title: "Indeed", url: "https://indeed.com/",
-      folder: "jobs", index: 2, pinned: false, customIcon: ""
+      id: "h13", title: "LeetCode", url: "https://leetcode.com/",
+      folder: "root", index: 12, pinned: false, customIcon: ""
     },
-    // — Dev —
     {
-      id: "d15", title: "LeetCode", url: "https://leetcode.com/",
+      id: "h14", title: "Draw.io", url: "https://app.diagrams.net/",
+      folder: "root", index: 13, pinned: false, customIcon: ""
+    },
+    {
+      id: "h15", title: "Excalidraw", url: "https://excalidraw.com/",
+      folder: "root", index: 14, pinned: false, customIcon: ""
+    },
+    {
+      id: "h16", title: "Overleaf", url: "https://www.overleaf.com/",
+      folder: "root", index: 15, pinned: false, customIcon: ""
+    },
+    {
+      id: "h17", title: "Reddit", url: "https://www.reddit.com/",
+      folder: "root", index: 16, pinned: false, customIcon: ""
+    },
+    {
+      id: "h18", title: "Discord", url: "https://discord.com/",
+      folder: "root", index: 17, pinned: false, customIcon: ""
+    },
+    {
+      id: "h19", title: "Pastebin", url: "https://pastebin.com/",
+      folder: "root", index: 18, pinned: false, customIcon: ""
+    },
+
+    // ── In Development Folder (dev) ─────────────────────────────────────────
+    {
+      id: "d1", title: "Spring Initializr", url: "https://start.spring.io/",
       folder: "dev", index: 0, pinned: false, customIcon: ""
     },
     {
-      id: "d16", title: "GeeksforGeeks", url: "https://geeksforgeeks.org/",
+      id: "d2", title: "Maven Repository", url: "https://mvnrepository.com/",
       folder: "dev", index: 1, pinned: false, customIcon: ""
     },
     {
-      id: "d17", title: "Draw.io", url: "https://app.diagrams.net/",
+      id: "d3", title: "Docker Hub", url: "https://hub.docker.com/",
       folder: "dev", index: 2, pinned: false, customIcon: ""
+    },
+    {
+      id: "d4", title: "LeetCode", url: "https://leetcode.com/",
+      folder: "dev", index: 3, pinned: false, customIcon: ""
+    },
+    {
+      id: "d5", title: "HackerRank", url: "https://www.hackerrank.com/",
+      folder: "dev", index: 4, pinned: false, customIcon: ""
+    },
+    {
+      id: "d6", title: "CodeChef", url: "https://www.codechef.com/",
+      folder: "dev", index: 5, pinned: false, customIcon: ""
+    },
+    {
+      id: "d7", title: "InterviewBit", url: "https://www.interviewbit.com/",
+      folder: "dev", index: 6, pinned: false, customIcon: ""
+    },
+    {
+      id: "d8", title: "Excalidraw", url: "https://excalidraw.com/",
+      folder: "dev", index: 7, pinned: false, customIcon: ""
+    },
+    {
+      id: "d9", title: "Overleaf", url: "https://www.overleaf.com/",
+      folder: "dev", index: 8, pinned: false, customIcon: ""
+    },
+
+    // ── Career Folder (career) ──────────────────────────────────────────────
+    {
+      id: "c1", title: "LinkedIn", url: "https://www.linkedin.com/",
+      folder: "career", index: 0, pinned: false, customIcon: ""
+    },
+    {
+      id: "c2", title: "Naukri", url: "https://www.naukri.com/",
+      folder: "career", index: 1, pinned: false, customIcon: ""
+    },
+    {
+      id: "c3", title: "Indeed", url: "https://www.indeed.com/",
+      folder: "career", index: 2, pinned: false, customIcon: ""
+    },
+    {
+      id: "c4", title: "Glassdoor", url: "https://www.glassdoor.com/",
+      folder: "career", index: 3, pinned: false, customIcon: ""
+    },
+    {
+      id: "c5", title: "Wellfound", url: "https://wellfound.com/",
+      folder: "career", index: 4, pinned: false, customIcon: ""
+    },
+    {
+      id: "c6", title: "Internshala", url: "https://internshala.com/",
+      folder: "career", index: 5, pinned: false, customIcon: ""
     }
   ]
 };
