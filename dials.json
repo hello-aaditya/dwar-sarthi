@@ -333,7 +333,7 @@
     "columns": 12,
     "customFont": "",
     "faviconService": "google",
-    "fontFamily": "Poppins",
+    "fontFamily": "JetBrains Mono",
     "searchEngine": "https://www.google.com/search?q=",
     "showLabels": true,
     "showSearch": true,
