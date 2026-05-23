@@ -191,7 +191,7 @@
     "searchEngine": "https://www.google.com/search?q=",
     "showLabels": true,
     "showSearch": true,
-    "theme": "light"
+    "theme": "dark"
   },
   "version": 1
 }
