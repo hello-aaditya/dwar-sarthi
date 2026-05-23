@@ -336,7 +336,12 @@
     "showLabels": true,
     "showSearch": true,
     "textSize": 13,
-    "theme": "dark"
+    "theme": "dark",
+    "fontFamily": "Inter",
+    "customFont": "",
+    "wallpaperBlur": 0,
+    "wallpaperDim": 20,
+    "wallpaperSource": ""
   },
   "version": 1
 }
