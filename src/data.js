@@ -5,7 +5,7 @@ export const DEFAULT_CONFIG = {
   version: 1,
   settings: {
     theme: "dark",          // default to dark mode
-    columns: 6,             // grid columns
+    columns: 12,             // grid columns
     showLabels: true,
     cardSize: 0.7,            // scale factor: 0.7 – 1.5
     textSize: 13,           // label font size in px: 10 – 24

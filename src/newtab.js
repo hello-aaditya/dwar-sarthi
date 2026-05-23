@@ -17,7 +17,7 @@ async function init() {
   config = stored.config || structuredClone(DEFAULT_CONFIG);
 
   applyAppearance();
-  renderGreeting();
+  // renderGreeting();
   renderFolderNav();
   renderGrid();
   renderSyncStatus(stored.last_sync, stored.sync_error);
@@ -136,11 +136,11 @@ function cycleTheme() {
 }
 
 // ── Greeting ───────────────────────────────────────────────────────────────
-function renderGreeting() {
-  const h = new Date().getHours();
-  const g = h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
-  document.getElementById("greeting").textContent = g;
-}
+// function renderGreeting() {
+//   const h = new Date().getHours();
+//   const g = h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
+//   document.getElementById("greeting").textContent = g;
+// }
 
 // ── Folder nav (draggable for reorder) ───────────────────────────────────────────────────
 let dragFolderIdx = null;
