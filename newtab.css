@@ -29,26 +29,26 @@
 }
 
 [data-theme="dark"] {
-  --bg:          #220a37;
-  --bg-card:     rgba(45, 18, 75, 0.45);
-  --bg-modal:    #1f0833;
-  --bg-input:    rgba(60, 24, 95, 0.4);
-  --bg-folder:   rgba(60, 24, 95, 0.25);
+  --bg:          #0a0a0c;
+  --bg-card:     rgba(22, 22, 26, 0.45);
+  --bg-modal:    #0f0f12;
+  --bg-input:    rgba(30, 30, 36, 0.45);
+  --bg-folder:   rgba(30, 30, 36, 0.25);
   --text:        #ffffff;
-  --text-muted:  #cbb6dd;
-  --text-label:  #f0e5fa;
+  --text-muted:  #a0a0b0;
+  --text-label:  #f0f0f5;
   --accent:      #8c4fc4;
   --accent-h:    #a66ee0;
-  --border:      rgba(175, 115, 235, 0.18);
-  --border-card: rgba(175, 115, 235, 0.12);
-  --shadow:      0 8px 32px rgba(0, 0, 0, 0.45);
-  --shadow-h:    0 8px 32px rgba(140, 80, 200, 0.25);
+  --border:      rgba(175, 115, 235, 0.12);
+  --border-card: rgba(175, 115, 235, 0.08);
+  --shadow:      0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-h:    0 8px 32px rgba(140, 80, 200, 0.2);
 }
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
 html, body {
   height: 100%;
-  font-family: var(--font-family, Georgia, "Times New Roman", Times, serif);
+  font-family: var(--font-family, "Outfit", "Inter", "Times New Roman", Times, serif);
   background: var(--bg);
   color: var(--text);
   font-size: var(--text-size);

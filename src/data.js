@@ -10,13 +10,13 @@ export const DEFAULT_CONFIG = {
     cardSize: 1,            // scale factor: 0.7 – 1.5
     textSize: 14,           // label font size in px: 10 – 24
     backgroundType: "gradient", 
-    backgroundColor: "#220a37",    
-    backgroundGradient: "radial-gradient(circle at center, #351356 0%, #170525 100%)",
+    backgroundColor: "#0a0a0c",    
+    backgroundGradient: "radial-gradient(circle at center, #16161a 0%, #0a0a0c 100%)",
     backgroundImage: "",
     searchEngine: "https://www.google.com/search?q=",
     showSearch: true,
     faviconService: "google", // "google" | "duckduckgo"
-    fontFamily: "Georgia",
+    fontFamily: "Outfit",
     customFont: "",
     wallpaperSource: "",
     wallpaperBlur: 0,
