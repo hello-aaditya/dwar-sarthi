@@ -165,14 +165,14 @@
   ],
   "folders": [
     {
-      "id": "f1779537824286",
+      "id": "root",
       "index": 0,
-      "name": "Home"
+      "name": "Root"
     },
     {
-      "id": "root",
+      "id": "f1779537824286",
       "index": 1,
-      "name": "Root"
+      "name": "Home"
     },
     {
       "id": "ai",
@@ -195,14 +195,14 @@
     "backgroundGradient": "radial-gradient(circle at center, #351356 0%, #170525 100%)",
     "backgroundImage": "",
     "backgroundType": "gradient",
+    "cardSize": 0.7,
     "columns": 8,
     "faviconService": "google",
     "searchEngine": "https://www.google.com/search?q=",
     "showLabels": true,
     "showSearch": true,
-    "theme": "dark",
-    "cardSize": 0.7,
-    "textSize": 19
+    "textSize": 19,
+    "theme": "dark"
   },
   "version": 1
 }
