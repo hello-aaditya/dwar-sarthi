@@ -154,30 +154,30 @@
       "url": "https://app.diagrams.net/"
     },
     {
-      "id": "d1779538403034",
-      "title": "ChatGPT",
-      "url": "https://chatgpt.com/",
+      "customIcon": "",
       "folder": "root",
+      "id": "d1779538403034",
       "index": 6,
       "pinned": false,
-      "customIcon": ""
+      "title": "ChatGPT",
+      "url": "https://chatgpt.com/"
     }
   ],
   "folders": [
     {
-      "id": "root",
-      "index": 0,
-      "name": "Root"
-    },
-    {
       "id": "ai",
-      "index": 1,
+      "index": 0,
       "name": "AI Tools"
     },
     {
       "id": "jobs",
-      "index": 2,
+      "index": 1,
       "name": "Job Hunt"
+    },
+    {
+      "id": "root",
+      "index": 2,
+      "name": "Root"
     },
     {
       "id": "dev",
