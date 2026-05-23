@@ -1,347 +1,347 @@
 {
-  "version": 1,
-  "settings": {
-    "theme": "dark",
-    "columns": 12,
-    "showLabels": true,
-    "cardSize": 0.7,
-    "textSize": 13,
-    "backgroundType": "gradient",
-    "backgroundColor": "#0a0a0c",
-    "backgroundGradient": "radial-gradient(circle at center, #16161a 0%, #0a0a0c 100%)",
-    "backgroundImage": "",
-    "searchEngine": "https://www.google.com/search?q=",
-    "showSearch": true,
-    "faviconService": "google",
-    "fontFamily": "Outfit",
-    "customFont": "",
-    "wallpaperSource": "",
-    "wallpaperBlur": 0,
-    "wallpaperDim": 20
-  },
+  "dials": [
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h1",
+      "index": 0,
+      "pinned": false,
+      "title": "Speedtest",
+      "url": "https://www.speedtest.net/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h2",
+      "index": 1,
+      "pinned": false,
+      "title": "YouTube",
+      "url": "https://www.youtube.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h3",
+      "index": 2,
+      "pinned": false,
+      "title": "Gmail",
+      "url": "https://mail.google.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h4",
+      "index": 3,
+      "pinned": false,
+      "title": "Drive",
+      "url": "https://drive.google.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h5",
+      "index": 4,
+      "pinned": false,
+      "title": "LinkedIn",
+      "url": "https://www.linkedin.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h6",
+      "index": 5,
+      "pinned": false,
+      "title": "GitHub",
+      "url": "https://github.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h7",
+      "index": 7,
+      "pinned": false,
+      "title": "Notion",
+      "url": "https://www.notion.so/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h8",
+      "index": 8,
+      "pinned": false,
+      "title": "ChatGPT",
+      "url": "https://chatgpt.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h9",
+      "index": 9,
+      "pinned": false,
+      "title": "Claude",
+      "url": "https://claude.ai/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h10",
+      "index": 10,
+      "pinned": false,
+      "title": "DeepSeek",
+      "url": "https://chat.deepseek.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h11",
+      "index": 11,
+      "pinned": false,
+      "title": "Mistral AI",
+      "url": "https://chat.mistral.ai/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h12",
+      "index": 12,
+      "pinned": false,
+      "title": "Gemini",
+      "url": "https://gemini.google.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h13",
+      "index": 13,
+      "pinned": false,
+      "title": "LeetCode",
+      "url": "https://leetcode.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h14",
+      "index": 14,
+      "pinned": false,
+      "title": "Draw.io",
+      "url": "https://app.diagrams.net/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h15",
+      "index": 15,
+      "pinned": false,
+      "title": "Excalidraw",
+      "url": "https://excalidraw.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h16",
+      "index": 16,
+      "pinned": false,
+      "title": "Overleaf",
+      "url": "https://www.overleaf.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h17",
+      "index": 17,
+      "pinned": false,
+      "title": "Reddit",
+      "url": "https://www.reddit.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h18",
+      "index": 18,
+      "pinned": false,
+      "title": "Discord",
+      "url": "https://discord.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "root",
+      "id": "h19",
+      "index": 6,
+      "pinned": false,
+      "title": "Pastebin",
+      "url": "https://pastebin.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "dev",
+      "id": "d1",
+      "index": 0,
+      "pinned": false,
+      "title": "Spring Initializr",
+      "url": "https://start.spring.io/"
+    },
+    {
+      "customIcon": "",
+      "folder": "dev",
+      "id": "d2",
+      "index": 1,
+      "pinned": false,
+      "title": "Maven Repository",
+      "url": "https://mvnrepository.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "dev",
+      "id": "d3",
+      "index": 2,
+      "pinned": false,
+      "title": "Docker Hub",
+      "url": "https://hub.docker.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "dev",
+      "id": "d4",
+      "index": 3,
+      "pinned": false,
+      "title": "LeetCode",
+      "url": "https://leetcode.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "dev",
+      "id": "d5",
+      "index": 4,
+      "pinned": false,
+      "title": "HackerRank",
+      "url": "https://www.hackerrank.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "dev",
+      "id": "d6",
+      "index": 5,
+      "pinned": false,
+      "title": "CodeChef",
+      "url": "https://www.codechef.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "dev",
+      "id": "d7",
+      "index": 6,
+      "pinned": false,
+      "title": "InterviewBit",
+      "url": "https://www.interviewbit.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "dev",
+      "id": "d8",
+      "index": 7,
+      "pinned": false,
+      "title": "Excalidraw",
+      "url": "https://excalidraw.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "dev",
+      "id": "d9",
+      "index": 8,
+      "pinned": false,
+      "title": "Overleaf",
+      "url": "https://www.overleaf.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "career",
+      "id": "c1",
+      "index": 0,
+      "pinned": false,
+      "title": "LinkedIn",
+      "url": "https://www.linkedin.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "career",
+      "id": "c2",
+      "index": 1,
+      "pinned": false,
+      "title": "Naukri",
+      "url": "https://www.naukri.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "career",
+      "id": "c3",
+      "index": 2,
+      "pinned": false,
+      "title": "Indeed",
+      "url": "https://www.indeed.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "career",
+      "id": "c4",
+      "index": 3,
+      "pinned": false,
+      "title": "Glassdoor",
+      "url": "https://www.glassdoor.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "career",
+      "id": "c5",
+      "index": 4,
+      "pinned": false,
+      "title": "Wellfound",
+      "url": "https://wellfound.com/"
+    },
+    {
+      "customIcon": "",
+      "folder": "career",
+      "id": "c6",
+      "index": 5,
+      "pinned": false,
+      "title": "Internshala",
+      "url": "https://internshala.com/"
+    }
+  ],
   "folders": [
     {
       "id": "root",
-      "name": "Home",
-      "index": 0
+      "index": 0,
+      "name": "Home"
     },
     {
       "id": "dev",
-      "name": "Development",
-      "index": 1
+      "index": 1,
+      "name": "Development"
     },
     {
       "id": "career",
-      "name": "Career",
-      "index": 2
+      "index": 2,
+      "name": "Career"
     }
   ],
-  "dials": [
-    {
-      "id": "h1",
-      "title": "Speedtest",
-      "url": "https://www.speedtest.net/",
-      "folder": "root",
-      "index": 0,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h2",
-      "title": "YouTube",
-      "url": "https://www.youtube.com/",
-      "folder": "root",
-      "index": 1,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h3",
-      "title": "Gmail",
-      "url": "https://mail.google.com/",
-      "folder": "root",
-      "index": 2,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h4",
-      "title": "Drive",
-      "url": "https://drive.google.com/",
-      "folder": "root",
-      "index": 3,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h5",
-      "title": "LinkedIn",
-      "url": "https://www.linkedin.com/",
-      "folder": "root",
-      "index": 4,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h6",
-      "title": "GitHub",
-      "url": "https://github.com/",
-      "folder": "root",
-      "index": 5,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h7",
-      "title": "Notion",
-      "url": "https://www.notion.so/",
-      "folder": "root",
-      "index": 6,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h8",
-      "title": "ChatGPT",
-      "url": "https://chatgpt.com/",
-      "folder": "root",
-      "index": 7,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h9",
-      "title": "Claude",
-      "url": "https://claude.ai/",
-      "folder": "root",
-      "index": 8,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h10",
-      "title": "DeepSeek",
-      "url": "https://chat.deepseek.com/",
-      "folder": "root",
-      "index": 9,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h11",
-      "title": "Mistral AI",
-      "url": "https://chat.mistral.ai/",
-      "folder": "root",
-      "index": 10,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h12",
-      "title": "Gemini",
-      "url": "https://gemini.google.com/",
-      "folder": "root",
-      "index": 11,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h13",
-      "title": "LeetCode",
-      "url": "https://leetcode.com/",
-      "folder": "root",
-      "index": 12,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h14",
-      "title": "Draw.io",
-      "url": "https://app.diagrams.net/",
-      "folder": "root",
-      "index": 13,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h15",
-      "title": "Excalidraw",
-      "url": "https://excalidraw.com/",
-      "folder": "root",
-      "index": 14,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h16",
-      "title": "Overleaf",
-      "url": "https://www.overleaf.com/",
-      "folder": "root",
-      "index": 15,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h17",
-      "title": "Reddit",
-      "url": "https://www.reddit.com/",
-      "folder": "root",
-      "index": 16,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h18",
-      "title": "Discord",
-      "url": "https://discord.com/",
-      "folder": "root",
-      "index": 17,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "h19",
-      "title": "Pastebin",
-      "url": "https://pastebin.com/",
-      "folder": "root",
-      "index": 18,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "d1",
-      "title": "Spring Initializr",
-      "url": "https://start.spring.io/",
-      "folder": "dev",
-      "index": 0,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "d2",
-      "title": "Maven Repository",
-      "url": "https://mvnrepository.com/",
-      "folder": "dev",
-      "index": 1,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "d3",
-      "title": "Docker Hub",
-      "url": "https://hub.docker.com/",
-      "folder": "dev",
-      "index": 2,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "d4",
-      "title": "LeetCode",
-      "url": "https://leetcode.com/",
-      "folder": "dev",
-      "index": 3,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "d5",
-      "title": "HackerRank",
-      "url": "https://www.hackerrank.com/",
-      "folder": "dev",
-      "index": 4,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "d6",
-      "title": "CodeChef",
-      "url": "https://www.codechef.com/",
-      "folder": "dev",
-      "index": 5,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "d7",
-      "title": "InterviewBit",
-      "url": "https://www.interviewbit.com/",
-      "folder": "dev",
-      "index": 6,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "d8",
-      "title": "Excalidraw",
-      "url": "https://excalidraw.com/",
-      "folder": "dev",
-      "index": 7,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "d9",
-      "title": "Overleaf",
-      "url": "https://www.overleaf.com/",
-      "folder": "dev",
-      "index": 8,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "c1",
-      "title": "LinkedIn",
-      "url": "https://www.linkedin.com/",
-      "folder": "career",
-      "index": 0,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "c2",
-      "title": "Naukri",
-      "url": "https://www.naukri.com/",
-      "folder": "career",
-      "index": 1,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "c3",
-      "title": "Indeed",
-      "url": "https://www.indeed.com/",
-      "folder": "career",
-      "index": 2,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "c4",
-      "title": "Glassdoor",
-      "url": "https://www.glassdoor.com/",
-      "folder": "career",
-      "index": 3,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "c5",
-      "title": "Wellfound",
-      "url": "https://wellfound.com/",
-      "folder": "career",
-      "index": 4,
-      "pinned": false,
-      "customIcon": ""
-    },
-    {
-      "id": "c6",
-      "title": "Internshala",
-      "url": "https://internshala.com/",
-      "folder": "career",
-      "index": 5,
-      "pinned": false,
-      "customIcon": ""
-    }
-  ]
+  "settings": {
+    "backgroundColor": "#0a0a0c",
+    "backgroundGradient": "radial-gradient(circle at center, #16161a 0%, #0a0a0c 100%)",
+    "backgroundImage": "",
+    "backgroundType": "gradient",
+    "cardSize": 0.7,
+    "columns": 12,
+    "customFont": "",
+    "faviconService": "google",
+    "fontFamily": "Outfit",
+    "searchEngine": "https://www.google.com/search?q=",
+    "showLabels": true,
+    "showSearch": true,
+    "textSize": 13,
+    "theme": "dark",
+    "wallpaperBlur": 0,
+    "wallpaperDim": 20,
+    "wallpaperSource": ""
+  },
+  "version": 1
 }
