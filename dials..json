@@ -201,7 +201,7 @@
     "showLabels": true,
     "showSearch": true,
     "theme": "dark",
-    "cardSize": 1.1,
+    "cardSize": 0.9,
     "textSize": 16
   },
   "version": 1
