@@ -19,7 +19,7 @@ export const DEFAULT_CONFIG = {
   },
   folders: [
     { id: "root",   name: "Home",            index: 0 },
-    { id: "dev",    name: "In development",  index: 1 },
+    { id: "dev",    name: "Development",     index: 1 },
     { id: "career", name: "Career",          index: 2 }
   ],
   dials: [
