@@ -175,7 +175,7 @@
       "customIcon": "",
       "folder": "dev",
       "id": "d1",
-      "index": 0,
+      "index": 1,
       "pinned": false,
       "title": "Spring Initializr",
       "url": "https://start.spring.io/"
@@ -184,7 +184,7 @@
       "customIcon": "",
       "folder": "dev",
       "id": "d2",
-      "index": 1,
+      "index": 2,
       "pinned": false,
       "title": "Maven Repository",
       "url": "https://mvnrepository.com/"
@@ -193,7 +193,7 @@
       "customIcon": "",
       "folder": "dev",
       "id": "d3",
-      "index": 2,
+      "index": 3,
       "pinned": false,
       "title": "Docker Hub",
       "url": "https://hub.docker.com/"
@@ -202,7 +202,7 @@
       "customIcon": "",
       "folder": "dev",
       "id": "d4",
-      "index": 3,
+      "index": 0,
       "pinned": false,
       "title": "LeetCode",
       "url": "https://leetcode.com/"
