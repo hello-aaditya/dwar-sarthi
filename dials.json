@@ -305,6 +305,15 @@
       "pinned": false,
       "title": "Internshala",
       "url": "https://internshala.com/"
+    },
+    {
+      "id": "d1779793713255",
+      "title": "KodNest",
+      "url": "https://app.kodnest.com/my-learning/home",
+      "folder": "root",
+      "index": 19,
+      "pinned": false,
+      "customIcon": ""
     }
   ],
   "folders": [
