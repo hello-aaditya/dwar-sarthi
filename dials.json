@@ -307,11 +307,20 @@
       "url": "https://internshala.com/"
     },
     {
-      "id": "d1779793713255",
-      "title": "KodNest",
-      "url": "https://app.kodnest.com/my-learning/home",
+      "customIcon": "",
       "folder": "root",
+      "id": "d1779793713255",
       "index": 19,
+      "pinned": false,
+      "title": "KodNest",
+      "url": "https://app.kodnest.com/my-learning/home"
+    },
+    {
+      "id": "d1779857856011",
+      "title": "TCS NextStep",
+      "url": "https://nextstep.tcsapps.com/indiacampus/#/home",
+      "folder": "root",
+      "index": 20,
       "pinned": false,
       "customIcon": ""
     }
