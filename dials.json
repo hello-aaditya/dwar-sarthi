@@ -323,6 +323,15 @@
       "pinned": false,
       "title": "TCS NextStep",
       "url": "https://nextstep.tcsapps.com/indiacampus/#/home"
+    },
+    {
+      "id": "d1780832660522",
+      "title": "ERP-Portal",
+      "url": "https://erpportal.bitmesra.ac.in/",
+      "folder": "root",
+      "index": 21,
+      "pinned": false,
+      "customIcon": ""
     }
   ],
   "folders": [
