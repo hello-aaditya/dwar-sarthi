@@ -325,11 +325,20 @@
       "url": "https://nextstep.tcsapps.com/indiacampus/#/home"
     },
     {
-      "id": "d1780832660522",
-      "title": "ERP-Portal",
-      "url": "https://erpportal.bitmesra.ac.in/",
+      "customIcon": "",
       "folder": "root",
+      "id": "d1780832660522",
       "index": 21,
+      "pinned": false,
+      "title": "ERP-Portal",
+      "url": "https://erpportal.bitmesra.ac.in/"
+    },
+    {
+      "id": "d1780832727700",
+      "title": "TnP-BIT",
+      "url": "https://tp.bitmesra.co.in/index.html",
+      "folder": "root",
+      "index": 22,
       "pinned": false,
       "customIcon": ""
     }
