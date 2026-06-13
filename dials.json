@@ -334,13 +334,13 @@
       "url": "https://erpportal.bitmesra.ac.in/"
     },
     {
-      "id": "d1780832727700",
-      "title": "TnP-BIT",
-      "url": "https://tp.bitmesra.co.in/index.html",
+      "customIcon": "",
       "folder": "root",
+      "id": "d1780832727700",
       "index": 22,
       "pinned": false,
-      "customIcon": ""
+      "title": "TnP-BIT",
+      "url": "https://tp.bitmesra.co.in/index.html"
     }
   ],
   "folders": [
@@ -374,7 +374,7 @@
     "showLabels": true,
     "showSearch": true,
     "textSize": 13,
-    "theme": "dark",
+    "theme": "auto",
     "wallpaperBlur": 0,
     "wallpaperDim": 20,
     "wallpaperSource": ""
