@@ -350,6 +350,15 @@
       "pinned": false,
       "title": "kimi",
       "url": "https://www.kimi.com/en"
+    },
+    {
+      "id": "d1782792924089",
+      "title": "Naukri",
+      "url": "https://naukri.com/",
+      "folder": "root",
+      "index": 24,
+      "pinned": false,
+      "customIcon": ""
     }
   ],
   "folders": [
